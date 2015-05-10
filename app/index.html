@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app="elevator">
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/elevator.css">
+    <script src="js/angular.min.js"></script>
+    <script src="js/elevator.js" charset="UTF-8"></script>
+    <script src="js/elevatorService.js"></script>
+  </head>
+  <body ng-controller="ElevatorCtrl">
+    <section>
+      <h2>Floor schematics</h2>
+      <table>
+        <tr ng-repeat="floor in floors">
+          <th scope="row" ng-class="car.active(floor.n) &amp;&amp; 'active'">
+            <span ng-show="car.active(floor.n)" ng-bind="car.state()"></span>
+          </th>
+          <td>{{floor.title}}</th>
+          <td ng-class="floor.light">&#x25cf;</td>
+          <td>
+            <button type="button" ng-click="call.makeCall(floor.n)">Call</button>
+            <button type="button" ng-click="unlockFloorDoor(floor.n)" ng-disabled="!car.canOpen(floor.n)">Open door</button>
+          </td>
+        <tr>
+      </table>
+      door floor {{floors[car.floor].title}} is {{floors[car.floor].stateDoor()}}
+    </section>
+
+    <section>
+      <h2>Controls in car</h2>
+      <ul>
+        <li ng-repeat="floor in floors">
+          <button type="button" ng-disabled="!car.occupied" ng-click="panel.press(floor.n)" ng-class="panel.btnClass(floor.n)">{{floor.title}}</button>
+        </li>
+        <li>
+          <button class="stop" type="button" ng-disabled="!car.occupied" ng-click="panel.stop()">STOP</button>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>User controls</h2>
+      <button type="button" ng-click="toggleCarDoor()" ng-disabled="canUseCarDoor(car.floor)">Open/Close car door</button>
+      <button type="button" ng-click="car.stepIn()" ng-disabled="enableStepIn()">Step in</button>
+      <button type="button" ng-click="car.stepOut()" ng-disabled="enableStepOut()">Step out</button>
+      door {{car.stateDoor()}}
+    </section>
+  </body>
+</html>
