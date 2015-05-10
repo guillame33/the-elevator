@@ -61,4 +61,35 @@ angular.module("elevator")
         };
 
         return call;
+    })
+
+    .factory('lightsService', function () {
+        //Object representing the lights
+        var lights = {
+            setFloorLightToRedExpectOne: function (floors,floorToGo){
+              floors.forEach(function (floor,n) {
+                if(floorToGo!==n)
+                  floor.light = "red";
+              })
+            },
+
+            setAllFloorLightToEmpty: function (floors){
+                floors.forEach(function (floor) {
+                  floor.light = "";
+                })
+            },
+
+            setFloorLightToGreen: function (floors,floorNumber){
+                floors[floorNumber].light = "green";
+            },
+
+            setLightForFloors: function(floors,floorToGoNow){
+                //Set the green
+                this.setFloorLightToGreen(floors,floorToGoNow);
+                //other light to red
+                this.setFloorLightToRedExpectOne(floors,floorToGoNow);
+            }
+        };
+
+        return lights;
     });

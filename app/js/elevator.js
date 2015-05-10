@@ -1,5 +1,5 @@
 angular.module("elevator", [])
-  .controller("ElevatorCtrl", ["$scope", "$interval","ElevatorService", function ($scope, $interval,ElevatorService) {
+  .controller("ElevatorCtrl", ["$scope", "$interval","ElevatorService","lightsService", function ($scope, $interval,ElevatorService,lightsService) {
     // Object representing the car
     var car = $scope.car = {
       active: function (n) {
@@ -41,7 +41,7 @@ angular.module("elevator", [])
       occupied: false
     };
 
-    var lights = {
+    /*var lights = {
       setFloorLightToRedExpectOne: function (floors,floorToGo){
       floors.forEach(function (floor,n) {
         if(floorToGo!==n)
@@ -65,7 +65,7 @@ angular.module("elevator", [])
         //other light to red
         this.setFloorLightToRedExpectOne(floors,floorToGoNow);
       }
-    };
+    };*/
 
     // Object representing the control panel in the car
     $scope.panel = {
@@ -103,6 +103,8 @@ angular.module("elevator", [])
     ElevatorService.then(function(resolve){
         call = $scope.call = resolve
     });
+
+    var lights = lightsService;
 
     //Say if we can move or not
     var readyToMove = function(){
