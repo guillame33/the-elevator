@@ -41,32 +41,6 @@ angular.module("elevator", [])
       occupied: false
     };
 
-    /*var lights = {
-      setFloorLightToRedExpectOne: function (floors,floorToGo){
-      floors.forEach(function (floor,n) {
-        if(floorToGo!==n)
-          floor.light = "red";
-      })
-    },
-
-      setAllFloorLightToEmpty: function (floors){
-        floors.forEach(function (floor) {
-          floor.light = "";
-        })
-      },
-
-      setFloorLightToGreen: function (floors,floorNumber){
-        floors[floorNumber].light = "green";
-      },
-
-      setLightForFloors: function(floors,floorToGoNow){
-        //Set the green
-        this.setFloorLightToGreen(floors,floorToGoNow);
-        //other light to red
-        this.setFloorLightToRedExpectOne(floors,floorToGoNow);
-      }
-    };*/
-
     // Object representing the control panel in the car
     $scope.panel = {
       btnClass: function (n) {
@@ -104,6 +78,7 @@ angular.module("elevator", [])
         call = $scope.call = resolve
     });
 
+    // use light service
     var lights = lightsService;
 
     //Say if we can move or not
